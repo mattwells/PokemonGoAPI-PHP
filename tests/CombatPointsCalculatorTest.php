@@ -48,6 +48,33 @@ class CombatPointsCalculatorTest extends TestCase
         $this->assertEquals(39, Calculator::getLevel(0.784637));
         $this->assertEquals(40, Calculator::getLevel(0.790300));
     }
+    
+    /** @test */
+    function max_cp()
+    {
+        $this->assertEquals( 0, Calculator::getMaxCp( 0,  0,  0));
+        $this->assertEquals( 0, Calculator::getMaxCp( 5,  0,  0));
+        $this->assertEquals( 0, Calculator::getMaxCp( 0,  5,  0));
+        $this->assertEquals( 0, Calculator::getMaxCp( 0,  0,  5));
+        $this->assertEquals( 0, Calculator::getMaxCp( 5,  5,  0));
+        $this->assertEquals( 0, Calculator::getMaxCp( 5,  0,  5));
+        $this->assertEquals( 0, Calculator::getMaxCp( 0,  5,  5));
+        $this->assertEquals( 1, Calculator::getMaxCp( 5,  5,  5));
+        $this->assertEquals( 3, Calculator::getMaxCp(10,  5,  5));
+        $this->assertEquals( 2, Calculator::getMaxCp( 5, 10,  5));
+        $this->assertEquals( 2, Calculator::getMaxCp( 5,  5, 10));
+        $this->assertEquals( 4, Calculator::getMaxCp(10, 10,  5));
+        $this->assertEquals( 4, Calculator::getMaxCp(10,  5, 10));
+        $this->assertEquals( 3, Calculator::getMaxCp( 5, 10, 10));
+        $this->assertEquals( 6, Calculator::getMaxCp(10, 10, 10));
+        $this->assertEquals( 9, Calculator::getMaxCp(15, 10, 10));
+        $this->assertEquals( 7, Calculator::getMaxCp(10, 15, 10));
+        $this->assertEquals( 7, Calculator::getMaxCp(10, 10, 15));
+        $this->assertEquals(11, Calculator::getMaxCp(15, 15, 10));
+        $this->assertEquals(11, Calculator::getMaxCp(15, 10, 15));
+        $this->assertEquals( 9, Calculator::getMaxCp(10, 15, 15));
+        $this->assertEquals(14, Calculator::getMaxCp(15, 15, 15));
+    }
 
     /** @test */
     function startdust_cost_for_powerup()
